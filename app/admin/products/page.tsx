@@ -19,7 +19,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import { dummyProducts } from "@/lib/dummy-data";
+import { dummyProducts, Product } from "@/lib/dummy-data";
 import { ProductForm } from "@/components/admin/product-form";
 
 export default function AdminProducts() {
@@ -50,7 +50,23 @@ export default function AdminProducts() {
             </DialogHeader>
             <ProductForm
               onSubmit={(data) => {
-                setProducts([...products, { ...data, id: Date.now().toString() }]);
+                const newProduct: Product = {
+                  ...data,
+                  id: Date.now().toString(),
+                  name: data.name || "",
+                  slug: data.slug || "",
+                  description: data.description || "",
+                  price: data.price || 0,
+                  images: data.images || [{ url: "", alt: "" }],
+                  category: data.category || "",
+                  tags: data.tags || [],
+                  specifications: data.specifications || {},
+                  stock: data.stock || 0,
+                  featured: data.featured || false,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                };
+                setProducts([...products, newProduct]);
                 setIsAddDialogOpen(false);
               }}
             />

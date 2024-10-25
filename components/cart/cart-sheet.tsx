@@ -14,12 +14,18 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { ShoppingCart, Minus, Plus, Trash2 } from "lucide-react";
 import { useStore } from "@/lib/store";
-import { formatPrice } from "@/lib/utils";
 
 export function CartSheet() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const { cart, removeFromCart, updateQuantity, subtotal, total, shippingCost } = useStore();
+  const {
+    cart,
+    removeFromCart,
+    updateQuantity,
+    subtotal,
+    total,
+    shippingCost,
+  } = useStore();
 
   const handleCheckout = () => {
     setOpen(false);

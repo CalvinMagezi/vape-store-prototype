@@ -19,7 +19,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import { categories } from "@/lib/dummy-data";
+import { categories, Category } from "@/lib/dummy-data";
 import { CategoryForm } from "@/components/admin/category-form";
 
 export default function AdminCategories() {
@@ -43,10 +43,14 @@ export default function AdminCategories() {
             </DialogHeader>
             <CategoryForm
               onSubmit={(data) => {
-                setCategoryList([
-                  ...categoryList,
-                  { ...data, id: Date.now().toString() },
-                ]);
+                const newCategory: Category = {
+                  id: Date.now().toString(),
+                  name: data.name || "",
+                  slug: data.slug || "",
+                  description: data.description || "",
+                  image: data.image || "",
+                };
+                setCategoryList([...categoryList, newCategory]);
                 setIsAddDialogOpen(false);
               }}
             />
